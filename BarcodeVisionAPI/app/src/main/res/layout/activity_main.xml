@@ -9,6 +9,15 @@
 
 
     <Button
+        android:id="@+id/lc3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/lc1"
+        android:layout_marginEnd="25dp"
+        android:text="DAY 3" />
+
+    <Button
         android:id="@+id/btnTakePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,12 +46,19 @@
         android:text="" />
 
     <Button
-        android:id="@+id/pushtofirebase"
+        android:id="@+id/lc1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="54dp"
+        android:layout_toStartOf="@+id/btnScanBarcode"
+        android:text="DAY 1" />
+
+    <Button
+        android:id="@+id/lc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/lc1"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="72dp"
-        android:visibility="invisible"
-        android:text="Add to database" />
+        android:text="DAY 2" />
 </RelativeLayout>
