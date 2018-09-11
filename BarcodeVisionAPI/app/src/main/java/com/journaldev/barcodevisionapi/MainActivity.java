@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     /*
 
-                        ADD codetosend TO FIREBASE!!!!!!!!!!!!!!!!!!
+                        check if codetosend exists in firebase!!!!!!!!!!!!!!!!!!
 
                      */
 
