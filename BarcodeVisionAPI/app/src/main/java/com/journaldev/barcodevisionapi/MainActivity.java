@@ -33,13 +33,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button butt = (Button) findViewById(R.id.lc1);
         Button butt2 = (Button) findViewById(R.id.lc2);
         Button butt3 = (Button) findViewById(R.id.lc3);
-        TextView txt = (TextView) findViewById(R.id.codetosend);
+        final TextView txt = (TextView) findViewById(R.id.codetosend);
 
         if(extras!=null){
             //Toast.makeText(this, "Back here broooo", Toast.LENGTH_SHORT).show();
-            final String codetosend = extras.getString("BarCode");
-                txt.setText("Check if barcode is right: "+codetosend+"");
 
+            final String codetosend = extras.getString("BarCode");
+                //txt.setText("Check if barcode is right: "+codetosend+"");
+            if(codetosend.length()>0) {
+                findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                FirebaseDatabase.getInstance().getReference(codetosend + "").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //Toast.makeText(MainActivity.this, size + " uwotm8", Toast.LENGTH_SHORT).show();
+
+                        p = dataSnapshot.getValue(Participant.class);
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        if (p.cty.length() > 0)
+                            txt.setText("Country: " + p.cty + "\n" + "Committee: " + p.com);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
                     /*
 
                         check if codetosend exists in firebase!!!!!!!!!!!!!!!!!!
@@ -50,21 +69,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 butt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
                         FirebaseDatabase.getInstance().getReference(codetosend+"").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 //Toast.makeText(MainActivity.this, size + " uwotm8", Toast.LENGTH_SHORT).show();
 
                                 p = dataSnapshot.getValue(Participant.class);
+                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                                 if(p.cty.length()>0){
                                     Toast.makeText(MainActivity.this, "Day 1 lunch done? : "+p.lc1, Toast.LENGTH_LONG).show();
                                     if(!p.lc1){
                                          Intent i = new Intent(MainActivity.this,ToggleLunch.class);
                                          i.putExtra("code",codetosend+"");
                                          i.putExtra("day","1");
+                                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                          startActivity(i);
-                                         finish();
                                     }
+                                    else
+                                        Toast.makeText(MainActivity.this, "You've had your share.", Toast.LENGTH_SHORT).show();
+
                                 }
 
                             }
@@ -80,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             butt2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
                     FirebaseDatabase.getInstance().getReference(codetosend+"").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -87,15 +112,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             p = dataSnapshot.getValue(Participant.class);
                             if(p.cty.length()>0){
+                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                                 Toast.makeText(MainActivity.this, "Day 2 lunch done? : "+p.lc2, Toast.LENGTH_LONG).show();
                                 if(!p.lc2){
                                     Intent i = new Intent(MainActivity.this,ToggleLunch.class);
                                     i.putExtra("code",codetosend+"");
                                     i.putExtra("day","2");
+                                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(i);
-                                    finish();
 
                                 }
+                                else
+                                    Toast.makeText(MainActivity.this, "You've had your share.", Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -111,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             butt3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
                     FirebaseDatabase.getInstance().getReference(codetosend+"").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -118,14 +147,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             p = dataSnapshot.getValue(Participant.class);
                             if(p.cty.length()>0){
+                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                                 Toast.makeText(MainActivity.this, "Day 3 lunch done? : "+p.lc3, Toast.LENGTH_LONG).show();
                                 if(!p.lc3){
                                     Intent i = new Intent(MainActivity.this,ToggleLunch.class);
                                     i.putExtra("code",codetosend+"");
                                     i.putExtra("day","3");
+                                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(i);
-                                    finish();
                                 }
+                                else
+                                    Toast.makeText(MainActivity.this, "You've had your share.", Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -153,12 +185,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.btnTakePicture:
-                startActivity(new Intent(MainActivity.this, PictureBarcodeActivity.class));
-                finish();
+                Intent i = new Intent(MainActivity.this, PictureBarcodeActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+
                 break;
             case R.id.btnScanBarcode:
-                startActivity(new Intent(MainActivity.this, ScannedBarcodeActivity.class));
-                finish();
+
+                Intent in = new Intent(MainActivity.this, ScannedBarcodeActivity.class);
+               // in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(in);
                 break;
         }
 

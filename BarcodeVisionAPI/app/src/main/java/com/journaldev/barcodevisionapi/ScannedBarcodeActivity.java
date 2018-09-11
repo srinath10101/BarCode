@@ -53,7 +53,7 @@ public class ScannedBarcodeActivity extends AppCompatActivity {
 
     private void initialiseDetectorsAndSources() {
 
-        Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
 
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
@@ -126,9 +126,11 @@ public class ScannedBarcodeActivity extends AppCompatActivity {
                                 if(intentData.length()>0){
                                     Intent myIntent = new Intent(ScannedBarcodeActivity.this, MainActivity.class);
                                     myIntent.putExtra("BarCode", intentData); //Optional parameters
+                                    myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(myIntent);
-                                    finish();
+
                                 }
+
 
 
                             }

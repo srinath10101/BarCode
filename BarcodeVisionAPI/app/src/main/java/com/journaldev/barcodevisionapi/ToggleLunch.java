@@ -36,7 +36,9 @@ public class ToggleLunch extends AppCompatActivity {
 
                         FirebaseDatabase.getInstance().getReference(code+"").child("lc1").setValue(hadlunch);
                         Toast.makeText(ToggleLunch.this, "Day 1 lunch done.", Toast.LENGTH_SHORT).show();
+
                         Intent i = new Intent(ToggleLunch.this,MainActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
                         finish();
 
@@ -57,6 +59,7 @@ public class ToggleLunch extends AppCompatActivity {
                         FirebaseDatabase.getInstance().getReference(code+"").child("lc2").setValue(hadlunch);
                         Toast.makeText(ToggleLunch.this, "Day 2 lunch done.", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ToggleLunch.this,MainActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
                         finish();
                     }
@@ -76,6 +79,7 @@ public class ToggleLunch extends AppCompatActivity {
                         FirebaseDatabase.getInstance().getReference(code+"").child("lc3").setValue(hadlunch);
                         Toast.makeText(ToggleLunch.this, "Day 3 lunch done.", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ToggleLunch.this,MainActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
                         finish();
                     }
