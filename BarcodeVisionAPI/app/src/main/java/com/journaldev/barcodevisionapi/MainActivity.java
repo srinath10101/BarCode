@@ -1,6 +1,7 @@
 package com.journaldev.barcodevisionapi;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,9 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initViews();
         Intent inten = getIntent();
         Bundle extras = inten.getExtras();
-        Button butt = (Button) findViewById(R.id.lc1);
-        Button butt2 = (Button) findViewById(R.id.lc2);
-        Button butt3 = (Button) findViewById(R.id.lc3);
+        final Button butt = (Button) findViewById(R.id.lc1);
+        final Button butt2 = (Button) findViewById(R.id.lc2);
+        final Button butt3 = (Button) findViewById(R.id.lc3);
         final TextView txt = (TextView) findViewById(R.id.codetosend);
 
         if(extras!=null){
@@ -50,7 +51,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         p = dataSnapshot.getValue(Participant.class);
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         if (p.cty.length() > 0)
-                            txt.setText("Country: " + p.cty + "\n" + "Committee: " + p.com);
+                            txt.setText("Country: " + p.cty + "\n" + "Committee: " + p.com + "\n" + "Name: " + p.nam+ "\n" + "Paid: " + !p.pay  );
+                        if (p.lc1){
+                            butt.setBackgroundColor(Color.GREEN);
+                        }
+                        else{
+                            butt.setBackgroundColor(Color.RED);
+                        }
+                        if (p.lc2){
+                            butt2.setBackgroundColor(Color.GREEN);
+                        }
+                        else{
+                            butt2.setBackgroundColor(Color.RED);
+                        }
+                        if (p.lc3){
+                            butt3.setBackgroundColor(Color.GREEN);
+                        }
+                        else{
+                            butt3.setBackgroundColor(Color.RED);
+                        }
                     }
 
                     @Override
