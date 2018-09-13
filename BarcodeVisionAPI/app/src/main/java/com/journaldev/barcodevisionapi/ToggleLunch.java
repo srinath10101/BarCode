@@ -29,11 +29,7 @@ public class ToggleLunch extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         check++;
-                        if(check%2==0)
-                            hadlunch = true;
-                        else
-                            hadlunch = false;
-
+                        hadlunch = false;
                         FirebaseDatabase.getInstance().getReference(code+"").child("lc1").setValue(hadlunch);
                         Toast.makeText(ToggleLunch.this, "Day 1 lunch done.", Toast.LENGTH_SHORT).show();
 
@@ -51,11 +47,7 @@ public class ToggleLunch extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         check++;
-                        if(check%2==0)
-                            hadlunch = true;
-                        else
-                            hadlunch = false;
-
+                        hadlunch = false;
                         FirebaseDatabase.getInstance().getReference(code+"").child("lc2").setValue(hadlunch);
                         Toast.makeText(ToggleLunch.this, "Day 2 lunch done.", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ToggleLunch.this,MainActivity.class);
@@ -71,11 +63,7 @@ public class ToggleLunch extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         check++;
-                        if(check%2==0)
-                            hadlunch = true;
-                        else
-                            hadlunch = false;
-
+                        hadlunch = false;
                         FirebaseDatabase.getInstance().getReference(code+"").child("lc3").setValue(hadlunch);
                         Toast.makeText(ToggleLunch.this, "Day 3 lunch done.", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ToggleLunch.this,MainActivity.class);

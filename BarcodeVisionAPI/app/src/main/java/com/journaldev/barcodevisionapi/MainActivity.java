@@ -80,14 +80,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 if(p.cty.length()>0){
                                     Toast.makeText(MainActivity.this, "Day 1 lunch done? : "+p.lc1, Toast.LENGTH_LONG).show();
                                     if(!p.lc1){
-                                         Intent i = new Intent(MainActivity.this,ToggleLunch.class);
-                                         i.putExtra("code",codetosend+"");
-                                         i.putExtra("day","1");
-                                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                         startActivity(i);
+
+                                        FirebaseDatabase.getInstance().getReference(codetosend+"").child("lc1").setValue(true);
+                                        Toast.makeText(MainActivity.this, "Day 1 lunch done.", Toast.LENGTH_SHORT).show();
+
                                     }
-                                    else
-                                        Toast.makeText(MainActivity.this, "You've had your share.", Toast.LENGTH_SHORT).show();
+                                    else{
+                                        Intent i = new Intent(MainActivity.this,ToggleLunch.class);
+                                        i.putExtra("code",codetosend+"");
+                                        i.putExtra("day","1");
+                                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(i);
+                                    }
 
                                 }
 
@@ -115,15 +119,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                                 Toast.makeText(MainActivity.this, "Day 2 lunch done? : "+p.lc2, Toast.LENGTH_LONG).show();
                                 if(!p.lc2){
+                                    FirebaseDatabase.getInstance().getReference(codetosend+"").child("lc2").setValue(true);
+                                    Toast.makeText(MainActivity.this, "Day 2 lunch done.", Toast.LENGTH_SHORT).show();
+
+                                }
+                                else{
+
                                     Intent i = new Intent(MainActivity.this,ToggleLunch.class);
                                     i.putExtra("code",codetosend+"");
                                     i.putExtra("day","2");
                                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(i);
-
                                 }
-                                else
-                                    Toast.makeText(MainActivity.this, "You've had your share.", Toast.LENGTH_SHORT).show();
+
                             }
 
                         }
@@ -150,14 +158,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                                 Toast.makeText(MainActivity.this, "Day 3 lunch done? : "+p.lc3, Toast.LENGTH_LONG).show();
                                 if(!p.lc3){
+                                    FirebaseDatabase.getInstance().getReference(codetosend+"").child("lc3").setValue(true);
+                                    Toast.makeText(MainActivity.this, "Day 3 lunch done.", Toast.LENGTH_SHORT).show();
+
+                                }
+                                else{
+
                                     Intent i = new Intent(MainActivity.this,ToggleLunch.class);
                                     i.putExtra("code",codetosend+"");
                                     i.putExtra("day","3");
                                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(i);
                                 }
-                                else
-                                    Toast.makeText(MainActivity.this, "You've had your share.", Toast.LENGTH_SHORT).show();
+
                             }
 
                         }
