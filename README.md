@@ -1,2 +1,2 @@
 # BarCode
-Android app to scan barcodes, update stuff in firebase.
+Android app to scan barcodes, and update details in firebase.
